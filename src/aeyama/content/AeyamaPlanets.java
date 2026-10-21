@@ -43,8 +43,6 @@ public class AeyamaPlanets {
                 r.staticFog = true;
             };
 
-            itemWhitelist = AeyamaItems.aeyamaItems;
-
             meshLoader = () -> new MultiMesh(
                 new NoiseMesh(this, 262436,
                               5, .9f, 4, 1f, .75f, 1.2f,

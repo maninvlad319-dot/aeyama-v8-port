@@ -1,5 +1,7 @@
 package aeyama.content;
 
+import aeyama.AeyamaSounds;
+
 import arc.graphics.*;
 
 import mindustry.ai.types.*;
@@ -85,7 +87,7 @@ public class AeyamaUnits {
                 shootY = 2f;
                 reload = 36f;
                 recoil = 2f;
-                shootSound = Sounds.spark;
+                shootSound = AeyamaSounds.get("spark");
                 shake = 0.1f;
                 alternate = false;
                 mirror = false;
@@ -260,7 +262,7 @@ public class AeyamaUnits {
                 shake = .35f;
                 alternate = false;
                 mirror = true;
-                shootSound = Sounds.none;
+                shootSound = AeyamaSounds.get("none");
                 bullet = new BasicBulletType() {{
                     damage = 8f;
                     speed = 30f;
@@ -318,7 +320,7 @@ public class AeyamaUnits {
                 shake = .25f;
                 alternate = false;
                 mirror = true;
-                shootSound = Sounds.none;
+                shootSound = AeyamaSounds.get("none");
                 bullet = new BasicBulletType() {{
                     damage = 2f;
                     speed = 20f;

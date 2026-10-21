@@ -19,10 +19,10 @@ public class Aeyama extends Mod {
         if (settings.getBool("aeyama-showNews")) NewsDialog.load();
         if (settings.getBool("aeyama-checkUpdate")) AeyamaUpdater.check();
 
-        // Hide the items of this mod on all the other planets.
-        for (Planet planet : Vars.content.planets()) {
-            if (planet.name != "aeyama")
-                planet.hiddenItems.addAll(AeyamaItems.aeyamaItems);
+        // v8: Planet.hiddenItems / itemWhitelist were removed, content is now shown per planet through shownPlanets.
+        // Show the items of this mod only on Aeyama.
+        for (Item item : AeyamaItems.aeyamaItems) {
+            item.shownPlanets.add(AeyamaPlanets.aeyama);
         }
     }
 

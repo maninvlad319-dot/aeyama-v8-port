@@ -23,6 +23,13 @@ public class AeyamaUpdater {
     private static float progress;
 
     public static void check() {
+        // The published releases of this mod target Mindustry v7 (build 145) and do not load on v8,
+        // so they must never be offered as an update to this v8 port.
+        if (true) {
+            Log.info("[green][Aeyama][lightgray] Update check is disabled in the v8 port.");
+            return;
+        }
+
         if (isDev) {
             Log.info("[green][Aeyama][lightgray] Not checking for update on development version.");
             return;

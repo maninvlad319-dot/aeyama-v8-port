@@ -1,5 +1,7 @@
 package aeyama.content;
 
+import aeyama.AeyamaSounds;
+
 import arc.graphics.*;
 
 import mindustry.content.*;
@@ -21,7 +23,7 @@ public class AeyamaWeapons {
 			shootY = 2f;
 			reload = 36f;
 			recoil = 2f;
-			shootSound = Sounds.spark;
+			shootSound = AeyamaSounds.get("spark");
 			shake = 0.1f;
 			alternate = false;
 			mirror = false;
@@ -53,7 +55,7 @@ public class AeyamaWeapons {
 			shootY = 2f;
 			reload = 25f;
 			recoil = 2f;
-			shootSound = Sounds.pew;
+			shootSound = AeyamaSounds.get("pew", "shoot");
 			shake = .25f;
 			alternate = false;
 			mirror = false;
@@ -74,7 +76,7 @@ public class AeyamaWeapons {
 			shootY = 2f;
 			reload = 40f;
 			recoil = 3f;
-			shootSound = Sounds.pew;
+			shootSound = AeyamaSounds.get("pew", "shoot");
 			shake = .25f;
 			alternate = false;
 			mirror = false;
@@ -106,7 +108,7 @@ public class AeyamaWeapons {
 			shootY = 2f;
 			reload = 60f;
 			recoil = 8f;
-			shootSound = Sounds.pew;
+			shootSound = AeyamaSounds.get("pew", "shoot");
 			shake = .25f;
 			alternate = false;
 			mirror = false;
@@ -127,7 +129,7 @@ public class AeyamaWeapons {
 			shootY = 2f;
 			reload = 1f;
 			recoil = 3f;
-			shootSound = Sounds.pew;
+			shootSound = AeyamaSounds.get("pew", "shoot");
 			shake = .25f;
 			alternate = false;
 			mirror = false;
@@ -151,7 +153,7 @@ public class AeyamaWeapons {
 			shake = .35f;
 			alternate = false;
 			mirror = true;
-			shootSound = Sounds.none;
+			shootSound = AeyamaSounds.get("none");
 			bullet = new BasicBulletType() {{
 				damage = 8f;
 				speed = 30f;
@@ -171,7 +173,7 @@ public class AeyamaWeapons {
 			shake = .25f;
 			alternate = false;
 			mirror = true;
-			shootSound = Sounds.none;
+			shootSound = AeyamaSounds.get("none");
 			bullet = new BasicBulletType() {{
 				damage = 2f;
 				speed = 20f;
@@ -191,7 +193,7 @@ public class AeyamaWeapons {
 			shake = 0.25f;
 			alternate = false;
 			mirror = false;
-			shootSound = Sounds.none;
+			shootSound = AeyamaSounds.get("none");
 			bullet = new BasicBulletType(5, 7) {{
 				status = AeyamaStatusEffects.knockdown;
 				statusDuration = 30;

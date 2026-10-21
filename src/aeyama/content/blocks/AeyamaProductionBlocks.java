@@ -1,5 +1,7 @@
 package aeyama.content.blocks;
 
+import aeyama.AeyamaSounds;
+
 import arc.graphics.*;
 import arc.struct.*;
 
@@ -68,7 +70,7 @@ public class AeyamaProductionBlocks {
                 new DrawRegion("-top")
             );
             attribute = Attribute.get("iron");
-            ambientSound = Sounds.drill;
+            AeyamaSounds.ambient(this, "drill");
 
             requirements(Category.production, with(AeyamaItems.woodLumber, 25, AeyamaItems.stoneBrick, 45));
         }};
@@ -85,7 +87,7 @@ public class AeyamaProductionBlocks {
                 new DrawRegion("-top")
             );
             attribute = Attribute.get("copper");
-            ambientSound = Sounds.drill;
+            AeyamaSounds.ambient(this, "drill");
 
             requirements(Category.production, with(AeyamaItems.woodLumber, 70, AeyamaItems.stoneBrick, 65, AeyamaItems.iron, 20));
         }};
@@ -102,7 +104,7 @@ public class AeyamaProductionBlocks {
                 new DrawRegion("-top")
             );
             attribute = Attribute.get("zinc");
-            ambientSound = Sounds.drill;
+            AeyamaSounds.ambient(this, "drill");
 
             requirements(Category.production, with(AeyamaItems.woodLumber, 70, AeyamaItems.stoneBrick, 65, AeyamaItems.iron, 20));
         }};
