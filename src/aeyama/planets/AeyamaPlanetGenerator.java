@@ -43,10 +43,13 @@ public class AeyamaPlanetGenerator extends PlanetGenerator {
     }
 
     @Override
-    public Color getColor(Vec3 position) {
+    public void getColor(Vec3 position, Color out) {
         Block block = getBlock(position);
-        if (block == null) return floorGrassB.mapColor;
-        return Tmp.c1.set(block.mapColor).a(1f - block.albedo);
+        if (block == null) {
+            out.set(floorGrassB.mapColor);
+            return;
+        }
+        out.set(block.mapColor).a(1f - block.albedo);
     }
 
     @Override
@@ -82,22 +85,8 @@ public class AeyamaPlanetGenerator extends PlanetGenerator {
     }
 
     @Override
-    public void generate(Tiles tiles, Sector sec, int seed) {
-        this.tiles = tiles;
-        this.sector = sec;
-        this.rand.setSeed(sec.id);
-        
-        TileGen gen = new TileGen();
-        for (int y=0; y < tiles.height; y++) {
-            for (int x=0; x < tiles.width; x++) {
-                gen.reset();
-                Vec3 position = sector.rect.project(x / tiles.width, y / tiles.height);
-
-                genTile(position, gen);
-                tiles.set(x, y, new Tile(x, y, gen.floor, gen.overlay, gen.block));
-            }
-        }
-        
+    protected void generate() {
+        // v8: PlanetGenerator already sets tiles/sector/seed and runs genTile() for every tile before calling this method.
         class Room {
             int x, y, radius;
             ObjectSet<Room> connected = new ObjectSet<>();
@@ -238,8 +227,6 @@ public class AeyamaPlanetGenerator extends PlanetGenerator {
         tech();
 
         float difficulty = sector.threat;
-        ints.clear();
-        ints.ensureCapacity(width * height / 4);
 
         Schematics.placeLaunchLoadout(spawn.x, spawn.y);
 
