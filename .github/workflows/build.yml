@@ -5,34 +5,36 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  MINDUSTRY_VERSION: v160.7
+
 jobs:
   buildJar:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up PATH
-      run: |
-        echo "${ANDROID_HOME}/build-tools/34.0.0" >> $GITHUB_PATH
-
+    - uses: actions/checkout@v4
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
-        java-version: 17.0.7
-        distribution: oracle
+        java-version: '17'
+        distribution: temurin
         cache: gradle
-    
-    - name: Build mod JAR
-      run: chmod +x ./gradlew; ./gradlew deploy
-
-    - name: Get current version
+    - name: Set up Android build tools (d8)
       run: |
-        version=$(${{github.workspace}}/gradlew -q printVersion)
-        echo "version=$version" >> $GITHUB_ENV
-
+        BT=$(ls -1 "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)
+        echo "$ANDROID_HOME/build-tools/$BT" >> "$GITHUB_PATH"
+    - name: Download the Mindustry game jar to compile against
+      run: |
+        mkdir -p libs
+        if curl -fL --retry 3 -o libs/Mindustry.jar "https://github.com/Anuken/Mindustry/releases/download/${MINDUSTRY_VERSION}/Mindustry.jar"; then
+          ls -la libs/Mindustry.jar
+        else
+          rm -f libs/Mindustry.jar
+        fi
+    - name: Build mod JAR
+      run: chmod +x ./gradlew; ./gradlew deploy --stacktrace
     - name: Upload built JAR file
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.repository.name }}-${{ env.version }}
-        path: build/libs/${{ github.event.repository.name }}-${{ env.version }}.jar
+        name: aeyama-v8
+        path: build/libs/*.jar
